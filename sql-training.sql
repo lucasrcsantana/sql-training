@@ -48,7 +48,6 @@ WHERE
 ;	
 
 #CATEGORY, LANGUAGE, NAME OF EVERY FILM
-#TO ADD A NICKNAME FOR THE TABLES, WE CAN SIMPLE PUT A LETTER AFTER THE NAME AND THIS WILL BE THE NICKNAME
 SELECT
 	film.title, language.name, category.name
 FROM 
@@ -57,13 +56,25 @@ WHERE
 	film.language_id = language.language_id AND film_category.film_id = film.film_id AND category.category_id = film_category.category_id
 ;	
 
-#
+#CATEGORY, LANGUAGE, NAME OF EVERY FILM
+#TO ADD A NICKNAME FOR THE TABLES, WE CAN SIMPLE PUT A LETTER AFTER THE NAME AND THIS WILL BE THE NICKNAME
 SELECT
-
+	f.title, l.name, c.name
 FROM 
-
+	film f, language l, film_category fc, category c
 WHERE
-	
+	f.language_id = l.language_id AND fc.film_id = f.film_id AND c.category_id = fc.category_id
+;	
+
+#HOW MANY TIMES EACH MOVIE HAS BEEN RENTED OUT?
+SELECT
+	f.title, count(r.rental_id)
+FROM 
+	film f, inventory i, rental r
+WHERE
+	f.film_id = i.film_id AND r.inventory_id = i.inventory_id
+GROUP BY
+	1
 ;	
 
 #
